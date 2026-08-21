@@ -1,13 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const tourController = require('../controller/tourController');
+const tourController = require("../controller/tourController");
 
-//Route to get all tours
-router.get('/tours', tourController.getAllTours);
+// Router to get all tours
+router.get("/tours", tourController.getAllTours);
 
-//Route to get a specific tour by ID
-router.get('tours/:id', tourController.getTourById);
+// Router to get a single tour by ID
+router.get("/tours/:id", tourController.getTourById);
 
-router.get('/tours/search' , tourController.getTourById)
+// Router to get tours by query
+router.get("/tours/search", tourController.getToursByQuery);
 
-module.exports = router; 
+router.post("/tours", (req, res) => {
+  const newTour = req.body;
+  const tours = tourController.getAllTours();
+  tour.push(newTour);
+  tourController.saveTour(newTour);
+  res.status(201).json({ message: "Created!!!" });
+});
+
+module.exports = router;
+
+// in postman, use http://localhost:3000/api/tours to get all the tours
