@@ -6,7 +6,7 @@ const getAllTours = (req, res) => {
   res.json(tours);
 };
 
-// // Get a single tour by ID
+// Get a single tour by ID
 const getTourById = (req, res) => {
   const tour = tourModel.getById(req.params.id);
   if (!tour) {
@@ -15,27 +15,26 @@ const getTourById = (req, res) => {
   res.json(tour);
 };
 
-// const getTourById = (req, res) => {
-//     const tourId = parseInt(req.params.id);
-//     const tour = tourModel.getById(tourId);
-//     res.json(tour);
-// };
-
-const getToursByQuery = (req, res) => {
+const getTourByquery = (req, res) => {
   const query = req.query.name;
-  const tours = tourModel.getByQuery(query);
+  const tours = tourModel.getByquery(query);
   res.json(tours);
 };
 
-const saveTour = (req, res) => {
-  tours = req.body;
+const saveTours = (req, res) => {
+  const tours = req.body;
   tourModel.save(tours);
-  res.status(201).send.json()
-};
+  res.status(201).json(tours);
 
+  const updateTours = (id, updatedTour) => {
+    const id = req.params.id;
+    const data = req.body;
+    tourModel.updateTour(id);
+  };
+};
 module.exports = {
   getAllTours,
   getTourById,
-  getToursByQuery,
+  getTourByquery,
   saveTours,
 };
